@@ -3,7 +3,7 @@ package models;
 import java.util.List;
 
 public class Point {
-    private Double[] coordinates;
+    private double[] coordinates;
     public List<Point> S;
     public int numDomin;
     public int rank;
@@ -22,11 +22,11 @@ public class Point {
         this.subject = subject;
     }
 
-    public Double[] getCoordinates() {
+    public double[] getCoordinates() {
         return coordinates;
     }
 
-    public void setCoordinates(Double[] coordinates) {
+    public void setCoordinates(double[] coordinates) {
         this.coordinates = coordinates;
     }
 

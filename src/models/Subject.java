@@ -1,23 +1,37 @@
 package models;
 
-public class Subject implements Comparable<Subject>{
-    private Double[] values;
-    private Double[] evaluation;
-    private Double crowdingDistance;
+import java.util.ArrayList;
+import java.util.List;
 
-    public  Subject(){
+public class Subject implements Comparable<Subject> {
+    private double[] genes;
+    private double[] evaluation;
+    private double crowdingDistance;
+    public BLXAlpha crossBLX;
+    public IMutation mutation;
 
-    }
-    public Subject(Double[] values) {
-        this.values = values;
-    }
-
-    public Double[] getValues() {
-        return values;
+    public Subject() {
+        this.crossBLX = new BLXAlpha(0.1);
     }
 
-    public void setValues(Double[] values) {
-        this.values = values;
+    public Subject(double[] genes) {
+        this.genes = genes;
+        this.crossBLX = new BLXAlpha(0.1);
+        this.mutation = new None();
+    }
+
+    public Subject(double[] genes, IMutation mutation) {
+        this.genes = genes;
+        this.crossBLX = new BLXAlpha(0.1);
+        this.mutation = mutation;
+    }
+
+    public double[] getValues() {
+        return genes;
+    }
+
+    public void setValues(double[] genes) {
+        this.genes = genes;
     }
 
     public double getCrowdingDistance() {
@@ -28,12 +42,34 @@ public class Subject implements Comparable<Subject>{
         this.crowdingDistance = crowdingDistance;
     }
 
-    public Double[] getEvaluation() {
+    public double[] getEvaluation() {
         return evaluation;
     }
 
-    public void setEvaluation(Double[] evaluation) {
+    public void setEvaluation(double[] evaluation) {
         this.evaluation = evaluation;
+    }
+
+    public List<Subject> recombine(Subject p2) {
+        List<Subject> children = new ArrayList<>(2);
+
+        double[][] childrenMat = crossBLX.getOffSpring(this.genes, p2.genes, new double[] { -10, -10, -10 },
+                new double[] { 10, 10, 10 });
+        Subject f1 = new Subject(childrenMat[0]);
+        Subject f2 = new Subject(childrenMat[1]);
+
+        if (f1.genes.length == 0 || f2.genes.length == 0) {
+            int i = 0;
+        }
+
+        children.add(f1);
+        children.add(f2);
+
+        return children;
+    }
+
+    public void mutate() {
+        this.genes = mutation.getMutation(this.genes, new double[] { -10, -10 }, new double[] { 10, 10 });
     }
 
     @Override

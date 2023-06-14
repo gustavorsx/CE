@@ -89,8 +89,8 @@ public class FNDS {
     private static boolean dominates(Point a, Point b) {
         boolean dominate = false;
 
-        Double[] p1coordinates = a.getSubject().getEvaluation();
-        Double[] p2coordinates = b.getSubject().getEvaluation();
+        double[] p1coordinates = a.getSubject().getEvaluation();
+        double[] p2coordinates = b.getSubject().getEvaluation();
 
         for (int i = 0; i < p1coordinates.length; i++) {
             if (p1coordinates[i] > p2coordinates[i]) {

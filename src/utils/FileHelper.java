@@ -25,7 +25,7 @@ public class FileHelper {
     }
 
     private static void createFunctionValuesFile(List<Subject> subjects, int numGen) throws IOException {
-        String path = "./src/files/" + numGen + "_values.txt";
+        String path = "./src/files/" + numGen + "_evaluation.txt";
         createFile(path, subjects, true);
     }
 
